@@ -48,3 +48,17 @@ $ npx pod-install
 $ yarn start
 $ yarn ios
 ```
+
+---
+
+<h3>Error Fix</h3>
+
+```
+Original:
+react_native_node_modules_dir = File.join(File.dirname(`cd #{Pod::Config.instance.installation_root.to_s} && node --print "require.resolve('react-native/package.json')"`), '..')
+
+Change to:
+react_native_node_modules_dir = File.join(File.dirname(`cd "#{Pod::Config.instance.installation_root.to_s}" && node --print "require.resolve('react-native/package.json')"`), '..')
+```
+
+참고: https://github.com/software-mansion/react-native-reanimated/issues/3771
