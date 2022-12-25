@@ -3,9 +3,10 @@ import {Animated, StyleSheet, Text,View} from "react-native"
 interface MData{
     totalMin:number;
     todayMin:number;
+    week:string;
 }
 
-function ProgressBar({totalMin,todayMin}:MData){
+function ProgressBar({totalMin,todayMin,week}:MData){
     const loaderValue = useRef(new Animated.Value(0)).current;
 
     const load = (count: number)=>{
@@ -25,24 +26,65 @@ function ProgressBar({totalMin,todayMin}:MData){
     useEffect(()=>{
         load(todayMin)
     },[todayMin]);
-    
-return(
-    <View>
-        <View style={styles.bar}>
-            
-            <Animated.View
-            style={{
-                backgroundColor:"#61E294",
-                width,
-                height:33,
-                borderTopLeftRadius:5,
-                borderBottomLeftRadius:5
+    const dayOfWeek='목'
+    const Date=()=>{
+        if(dayOfWeek==week){
+            return(
+                <View>
+               
+                <Sucess/> 
+                <View style={styles.red}/>
+                </View>
+            )
+        }
+        else{
+            return(
+                <Sucess/>
+            )
+        }
+    }
+   const Sucess=()=>{
+    if(totalMin==todayMin){
+        return(
+            <View>
+                    <View style={styles.bar2}>
+                        
+                        <Animated.View
+                        style={{
+                            backgroundColor:"#61E294",
+                            width,
+                            height:33,
+                            borderRadius:5,
+                        }}
+                        ><Text style={styles.date}>{week}</Text></Animated.View>
+                    </View>
+                    {/* <Text style={styles.step}>{todayMin}/{totalMin}</Text> */}
+                </View>
+        )
+    }
+    else{
+        return(
+            <View>
+            <View style={styles.bar}>
                 
-            }}
-            ><Text style={styles.date}>목</Text></Animated.View>
+                <Animated.View
+                style={{
+                    backgroundColor:"#B0F0C9",
+                    width,
+                    height:33,
+                    borderTopLeftRadius:5,
+                    borderBottomLeftRadius:5
+                    
+                }}
+                ><Text style={styles.date}>{week}</Text></Animated.View>
+            </View>
+            {/* <Text style={styles.step}>{todayMin}/{totalMin}</Text> */}
         </View>
-        <Text style={styles.step}>{todayMin}/{totalMin}</Text>
-    </View>
+        )
+    }
+   } 
+return(
+   <Date/>
 )
 }
 
@@ -51,21 +93,57 @@ return(
 const styles=StyleSheet.create({
     bar:{
         
-        width:"30%",
+        width:100,
         height:35,
         transform:[{rotate:'270deg'}],
         backgroundColor:"#fff",
-        borderColor:"#3c3c3c",
+        borderColor:"#bbb",
         borderWidth:1,
-        borderRadius:5
+        borderRadius:5,
+        marginTop:50,
+        top:20,
+        left:-20,
+        marginRight:-50,
+        alignContent:'center',
+        justifyContent:'center'
+        
+    },
+    bar2:{
+        
+        width:100,
+        height:35,
+        transform:[{rotate:'270deg'}],
+        backgroundColor:"#fff",
+        borderColor:"#61E294",
+        borderWidth:1,
+        borderRadius:5,
+        marginTop:50,
+        top:20,
+        left:-20,
+        marginRight:-50,
+        alignContent:'center',
+        justifyContent:'center'
+        
     },
     step:{
-        color:"#fff",
+        color:"#000",
 
     },
     date:{
         transform:[{rotate:'-270deg'}],
+        position:'absolute',
+        top:10,
+        left:45,
+        fontWeight:'bold'
         
+    },
+    red:{
+        borderRadius:100,
+        borderWidth:5,
+        position: 'absolute',
+        borderColor:'red',
+        top:35,
+        left:40
     }
 })
 
