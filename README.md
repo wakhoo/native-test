@@ -62,3 +62,10 @@ react_native_node_modules_dir = File.join(File.dirname(`cd "#{Pod::Config.instan
 ```
 
 참고: https://github.com/software-mansion/react-native-reanimated/issues/3771
+
+<h2>Result</h2>
+
+<div align='center'>
+<img src="https://github.com/wakhoo/wakhoo/blob/main/pic/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-12-25%20at%2018.33.15.png?raw=true" height="1050px" width="500px"/>
+<img src="https://github.com/wakhoo/wakhoo/blob/main/pic/Simulator%20Screen%20Shot%20-%20iPhone%2013%20-%202022-12-25%20at%2019.28.08.png?raw=true" height="1050px" width="500px"/>
+<div>
