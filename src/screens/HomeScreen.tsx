@@ -1,9 +1,9 @@
 import { css } from '@emotion/native'
 import { useRef,useState } from 'react'
-import { Animated, Dimensions, Text, View } from 'react-native'
+import { Animated, Dimensions, StyleSheet, Text, View } from 'react-native'
 
+import ProgressBar from '@app/components/ProgressBar'
 import { STATUS, SwipeablePanel } from '@app/components/SwipeablePanel'
-
 const HomeScreen: React.FC = () => {
 	const [panelStatus, setPanelStatus] = useState(2)
 	const panelHeight = Dimensions.get('window').height * 0.8
@@ -76,12 +76,21 @@ const HomeScreen: React.FC = () => {
                         flex-direction: column;
                     `, { height: panelHeight  }]}>
                         <Text style={css`font-size: 18px; text-align: center`}>이번 주에 4일 연속으로 접속하셨어요.</Text>
+                        {/* target이랑 today랑 차이가 나면 뜨게 함 */}
+                        <Text style={css`font-size: 18px; text-align: center`}>{userData.targetMinutes-data.todayMinutes}분 더 대화하시면 오늘 목표가 달성돼요!</Text>
+                        
+                        <View style={styles.date}>
+                            <ProgressBar totalMin={userData.targetMinutes} todayMin={data.todayMinutes}/>
+                            <ProgressBar totalMin={userData.targetMinutes} todayMin={20}/>
+                        </View>
                         <View style={[css`
                             flex: 0.3;
                             flex-direction: row;
                             justify-content: flex-end;
                             // background-color: red;
                         `]}>
+                            
+                            
                             {/* <MBText>{JSON.stringify(greetings.data)}</MBText> */}
                             {/* Enter statistics */}
 				        </View>
@@ -95,3 +104,11 @@ const HomeScreen: React.FC = () => {
 }
 
 export default HomeScreen
+
+const styles=StyleSheet.create({
+    date:{
+        flex:1,
+        flexDirection:'column',
+        alignContent:'stretch'
+    }
+})
